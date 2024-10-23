@@ -1,15 +1,33 @@
 const express = require('express');
 const app = express();
 
-app.use("/test", (req, res) => {
-    // res.send('Hello I am your node friend')
-    const data = {
-        name: 'raul jha',
+
+// Creating the User GET, POST, DELETE Methods
+
+// GET
+app.get('/user', (req, res) => {
+    res.send({
+        name: 'Rahul Jha',
         age: 33
-    }
-    res.send(data);
+    })
+})
+
+//POST
+app.post('/user', (req, res) => {
+    res.send('User Data Successfully Saved to the database')
+})
+
+//DELETE
+app.delete('/user', (req, res) => {
+    res.send('User Deleted Successfully')
+})
+
+//PATCH
+app.patch('/user', (req, res) => {
+    res.send('User data updated successfully..')
 })
 
 app.listen(3000, () => {
-    console.log(`Servr is running on 3000....`)
+    console.log('Server is running on PORT 3000...')
 })
+

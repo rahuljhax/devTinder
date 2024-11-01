@@ -1,33 +1,27 @@
-const express = require('express');
+const express = require('express')
+const { connectDB } = require('./config/database');
 const app = express();
+const User = require('./models/user');
+app.post('/signup', async (req, res) => {
+    const userData = {
+        firstName: req.query.firstName,
+        lastName: req.query.lastName,
+        emailId: req.query.emailId,
+        password: req.query.password,
+        age: req.query.age,
+        gender: req.query.gender
+    }
 
+    const user = new User(userData);
+    await user.save();
+    res.send('User Added Successfully')
+})
 
-// Creating the User GET, POST, DELETE Methods
-
-// GET
-app.get('/user', (req, res) => {
-    res.send({
-        name: 'Rahul Jha',
-        age: 33
+connectDB().then(() => {
+    console.log('Database connection established!!')
+    app.listen(3000, () => {
+        console.log('Server is running on PORT 3000...')
     })
+}).catch((err) => {
+    console.log('Something went wrong')
 })
-
-//POST
-app.post('/user', (req, res) => {
-    res.send('User Data Successfully Saved to the database')
-})
-
-//DELETE
-app.delete('/user', (req, res) => {
-    res.send('User Deleted Successfully')
-})
-
-//PATCH
-app.patch('/user', (req, res) => {
-    res.send('User data updated successfully..')
-})
-
-app.listen(3000, () => {
-    console.log('Server is running on PORT 3000...')
-})
-

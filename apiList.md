@@ -14,13 +14,11 @@
 
 ##connectionRequestRouter
 
-- POST /request/send/interested/:userId
-- POST /request/send/ignored/:userId
-- POST /request/review/accepted/:requesId
-- POST /request/review/rejected/:requesId
+- POST /request/send/:status/:toUserId
+- POST /request/review/:status/:requesId
 
 ##userRouter
 
+- GET /user/request/received
 - GET /user/connections
-- GET /user/request
 - GET /user/feed
